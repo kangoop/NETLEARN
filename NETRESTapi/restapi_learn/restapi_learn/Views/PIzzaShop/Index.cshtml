@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model  PizzaShop;
+
+@{
+
+    ViewData["Title"] = "Pizza List 🍕";
+
+    List<PizzaShop> pizzalist = ViewData["pizzalist"] as List<PizzaShop>;
+}
+
+
+<h1>Pizza List 🍕</h1>
+
+<a asp-controller="PizzaShop" asp-action="Create">
+    <button class="btn btn-link">Create </button>
+</a>
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Size</th>
+            <th scope="col">Gluten Free</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pizza in pizzalist)
+        {
+            <tr>
+                <td>@pizza.Name</td>
+                <td>@($"{pizza.Price:C}")</td>
+                <td>@pizza.Size</td>
+                <td>@(pizza.IsGlutenFree ? "✔️" : string.Empty)</td>
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@pizza.Id">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

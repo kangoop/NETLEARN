@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\restapi_learn.props" />
+</Project>
